@@ -2,9 +2,108 @@
 This repository contains guidance, example code, and instructions for working with the Inovalon database
 at Harvard Medical School.
 
-## O2 Cluster
+Working with the Inovalon Healthcare Utilization Database
 
-All of what follows assumes that you are working in an interactive job.
+## Introduction
+The Inovalon data is stored in a large relational database, Microsoft SQL Server, on Windows Server. There are two primary methods for accessing the data: 
+
+1. You can remote desktop to the database server and use Microsoft’s SQL Server Management Studio (SSMS), which provides a convenient GUI for query construction (provides syntax highlighting, code completion, allows you to interactively explore the database).
+
+2. You can create an encrypted connection to the server from O2 compute nodes and pull data into a program such as R, Python, or another analytic tool so that you can perform statistical analyses of the data.
+
+Our recommended workflow is for users to connect to the server with Remote Desktop and use the interactive
+query tools there to carve off the relevant data for their analysis into a personal database (details below).
+Then, for statistical analysis, modelling, figure plotting, etc, pull that subset of the data from your personal
+database to an O2 compute node in R or Python.
+
+You will need access to the Harvard Medical School VPN to continue.  You can request access if you don’t already have it, and learn how to configure your VPN client software here:
+
+http://it.hms.harvard.edu/services/servers-network/virtual-private-network
+
+## Connecting to the Database Server with Remote Desktop
+If you are on a macOS machine, you can download Microsoft Remote Desktop from the App Store.  Just search for “Microsoft Remote Desktop” and install the app (it’s free).  If you are on a Windows computer, then you should have the Remote Desktop tool installed by default (it’s typically located in the “Windows Accessories” folder in your start menu).
+
+Start the Remote Desktop application and create a new connection. You can provide whatever name you’d like for the connection.  The server address for the connection should be:
+
+`ccbwsqlp01.med.harvard.edu`
+
+Use your HMS user name and password.  Because this is a Windows machine, you need to add the Windows domain name (“MED\”) in front of your username.  So if your user ID is `abc123`, you would enter `MED\abc123` for your username to log on to Windows.
+
+*IMPORTANT:*
+
+The database server is located on a private network.  Access to this network is restricted by a firewall.  Your VPN account has been configured to allow you access to this network, and we have allowed very limited access to this network from the HMS O2 computing cluster.
+
+You cannot connect directly to the database server (e.g., via remote desktop) without first starting your two-factor secured HMS Pulse Secure VPN connection. If you are having trouble connecting via Remote Desktop, the first thing to check is to make sure that your VPN connection is running.
+
+After starting your VPN connection, open the Remote Desktop connection created above.  You will be presented with a virtual session on the database server once you successfully log in.  To start SSMS, click the Windows Start button, click “Microsoft SQL Server Tools 19” and click on “Microsoft SQL Server Management Studio”.
+
+Once SSMS starts, you will be presented with a “Connect to Server” dialog.  Make sure the following default values are set in the dialog box, then click “Connect”.
+
+Server type: Database Engine
+Server name: localhost
+Authentication: Windows Authentication
+
+Once the connection is established, click New Query on the toolbar to create a new query session.
+
+## Relational Database Learning Materials
+An introduction to relational database systems is beyond the scope of this document.  If you need more information on working with the SQL language, relational database, or relational algebra in general, these are good starting points:
+
+* https://www.coursera.org/learn/introduction-to-relational-databases#syllabus (sign up, and choose to audit the course for free, no need for free trial or to pay)
+
+* https://www.amazon.com/Database-Management-Systems-Raghu-Ramakrishnan/dp/0072465638
+
+* There are many good O’Reilly technical books freely available to Harvard faculty, students, and employees.  Go here: https://library.harvard.edu/services-tools/oreilly-learning-platform and log in with your Harvard credentials.  Once you’re logged in to the O’Reilly site, search for “SQL”.
+
+* https://learn.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver15
+
+There are many other good tutorials available on the web.
+
+## The Inovalon Database
+The Inovalon data is stored in the database named "Inovalon". Please see the [Inovalon help center] for data dictionaries, database diagrams, FAQs and more.
+
+## Creating Your Own Database
+You can create your own database on the server, which may be useful as a temporary place to store intermediate tables.  To do so, in SSMS, right-click on the “Databases” entry of the treeview on the left side of the screen.  Click on “New Database…”.  Please use your username as the name for the database.  Do not change the default file locations.  One change that you MUST make is to select the “Options” page on the left side of the “New Database” dialog and change the “Recovery model” value from “Full” to “Simple”.  Failure to do this will cause your transaction logs to expand unnecessarily, consuming large amounts of disk space.  If this happens, we will delete your database and you will be forced to recreate your work.
+
+### Allowing Other Users to Access Your Database.
+By default, in SQL Server, a database is only accessible by the user who created it.  There are times when it may be helpful to allow other to access your database, e.g., when working on a team, or creating a database that you believe would generally be useful to others. 
+
+The easiest way to do this is through the GUI.  Expand your database in the tree view on the left, expand `Security` and right click on `Users`.  Select `New User`.  Under `User Type` select `Windows user`.  Under `User name` click on the ellipsis `…`.  
+Then click on `Locations`, expand `Entire Directory`, `MED.HARVARD.EDU`, then select `PEOPLE` and click `OK`. 
+You can then search for a name by clicking `Check Names`.  Then click `OK`. 
+
+Once you’ve selected the name, you can leave `Login name` and `Default schema` blank.  Click `Membership` on the left, and select the permissions you’d like to grant.  If you want the user to have read-only access, then select `db_datareader`.  If you want the user to be able to write data, select `db_datawriter` (for more information on permissions: https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/database-level-roles?view=sql-server-ver15). Click `OK` and you’re done.
+
+
+## Scratch Space on the Server and Transferring Files
+The `S:\` drive on this server is dedicated temporary “scratch” space.  You can use this area as temporary storage.  Files on this drive older than 30 days will be automatically deleted.  You can “map” or “mount” this volume remotely, allowing you to transfer files to the server e.g. to be staged into your own database.  
+
+From a macOS machine with an active VPN connection, you can mount the scratch space through Finder.  In the menu bar, click `Go` then `Connect to Server`.  Enter this SMB share address, and click `Connect`: `smb://ccbwsqlp01.med.harvard.edu/UserTemp$`
+
+Make sure to include the dollar sign at the end (it’s an indication that the share is hidden and not browsable on the network).  When prompted for your credentials, again, use your HMS user ID prefixed by “MED\” to indicate it is a Windows domain account.
+
+From a Windows client machine with an active VPN connection, in File Explorer, right-click `This PC` and select `Map network drive…`.  Select a drive letter of your own choosing, and in the `Folder` text box, enter:
+
+`\\ccbwsqlp01.med.harvard.edu\UserTemp$`
+
+## A Note on Disaster Recovery
+We are not performing backups of any kind on this platform.  We are recommending that users not try to copy or backup their data, but rather backup the scripts and code that were used to generate the data. If there is a storage failure on the server, please assume that everything on it will be un-recoverable.  We will repair the storage, and a new copy of the Inovalon database will be available, but everything else will be lost.  You are responsible for keeping backup copies of your code on a separate platform.
+
+## Connecting to the Database from the O2 Cluster
+If you are unfamiliar with the Medical School's high-performance compute cluster, called "O2", you can read about it here:
+https://wiki.rc.hms.harvard.edu/display/O2
+
+To request an O2 account, see:
+
+https://harvardmed.atlassian.net/wiki/spaces/O2/pages/1918304257/How+to+request+or+retain+an+O2+account
+
+All of what follows assumes that you are working in an interactive slurm job on the O2 cluster, for example with an `srun`
+command such as 
+
+```
+srun --pty -p interactive --mem 1024M -c 1 -t 0-06:00 --account=[ACCOUNT] /bin/bash
+```
+
+replacing `[ACCOUNT]` with an appropriate value.
 
 ## Working in R and Python on O2
 The O2 cluster uses a [module system](https://harvardmed.atlassian.net/wiki/spaces/O2/pages/1588661845/Using+Applications+on+O2) 
