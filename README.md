@@ -2,8 +2,6 @@
 This repository contains guidance, example code, and instructions for working with the Inovalon database
 at Harvard Medical School.
 
-Working with the Inovalon Healthcare Utilization Database
-
 ## Introduction
 The Inovalon data is stored in a large relational database, Microsoft SQL Server, on Windows Server. There are two primary methods for accessing the data: 
 
