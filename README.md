@@ -69,7 +69,7 @@ After loading the modules described above and acquiring kerberos tickets in an i
 can test connectivity to the database server using the `tsql` interactive query tool:
 
 ```
-USERNAME@compute-a-16-167 (~): tsql -S DBMIHDSWSQLP01.med.harvard.edu
+USERNAME@compute-a-16-167 (~): tsql -S CCBWSQLP01.med.harvard.edu
 locale is "en_US.UTF-8"
 locale charset is "UTF-8"
 using default charset "UTF-8"
@@ -143,7 +143,7 @@ host where your VS Code session is running.  Run `kinit` in that shell and enter
 
 Bring up the Command Pallate (CTRL + shift + P), and begin typing 
 "sql: add connection".  It should autocomplete; select "MS SQL: Add Connection".  When prompted for a server name, 
-enter "DBMIHDSWSQLP01.med.harvard.edu" (no quotes).  For the database, enter "Inovalon" (no quotes).
+enter "CCBWSQLP01.med.harvard.edu" (no quotes).  For the database, enter "Inovalon" (no quotes).
 For Authenticaion Type, select "Integrated".  Optionally provide a display name for the connection.  You should 
 see a prompt in the bottom-right of the window about encryption on the connection; click "Enable Trust Server Certificate".
 
