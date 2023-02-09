@@ -9,20 +9,19 @@ All of what follows assumes that you are working in an interactive job.
 ## Working in R and Python on O2
 The O2 cluster uses a [module system](https://harvardmed.atlassian.net/wiki/spaces/O2/pages/1588661845/Using+Applications+on+O2) 
 to manage software packages.  Before you can connect to the database server from either R or Python, you need to make 
-the underlying database drivers accessible in your session.  This is accomplished by loading several 
-modules with this command:
+the underlying database drivers accessible in your session.  Load the required modules with:
 
 ```
 module load gcc/6.2.0 unixODBC msodbcsql17/17.7.2.1-1 freetds
 ```
 
 That command can be executed in the shell on a per-session basis, or you can add it to your shell initialization file, 
-e.g., by adding it to the end of your `.bashrc` script, which will ensure the libraries are available every time you 
+e.g., by adding it to the end of your `.bashrc` script, which will ensure that the libraries are available every time you 
 log in to the cluster, and in every job that you run.  If you add it to your initialization script, make sure to 
 log out and then back in to the cluster after you edit the file, before you attempt to connect to the database.
 
-To verify that the module successfully loaded in your session, you can run the `module list` command.  You should
-see `msodbcsql17/17.7.2.1-1` and the otherse listed above among the currently loaded modules, e.g.:
+To verify that the modules successfully loaded in your session, you can run the `module list` command.  You should
+see `msodbcsql17/17.7.2.1-1` and the others listed above among the currently loaded modules, e.g.:
 
 ```
 USERNAME@compute-e-16-233 (~): module list
@@ -32,9 +31,9 @@ Currently Loaded Modules:
 ```
 
 ### Authentication
-Access to the Inovalon database is provided on a per-user basis.  The O2 compute nodes use  
-Kerberos to authenticate your specific user credentials to the database server.  You will need to interactively
-enter your password only once per session, and once you're authenticated, the session will hold a "ticket"
+Access to the Inovalon database is provided on a per-user basis.  The O2 compute nodes use 
+Kerberos to authenticate your user credentials to the database server.  You will need to interactively
+enter your password only once per session, and after you're authenticated, the session will hold a "ticket"
 that grants access to the database for the duration of the job.  This single-sign-on approach eliminates
 the need for both multiple manual password entries per session, and clear-text embedding of credentials in 
 R or Python code.
@@ -79,27 +78,23 @@ using default charset "UTF-8"
 ```
 
 Press enter after the `SELECT` statement and after entering `GO`.  The program should print 10 rows
-of data from the database table to the console.  If it didn't, then check that you 
+of data from the database table to the console.  If it didn't, then check that you have loaded the 
+required modules and have acquired kerberos tickets.
 
 ### R
-In order to run R on O2, you need to load the module that corresponds to your preferred version of
-R.  This is in addition to the modules listed above.  To see the available versions, run this at the command line:
+In order to run R on O2, you first need to load the appropraite software module. As above, the module 
+can be loaded manually on a per-session basis, or the command can be added to you `~/.bashrc` initialization script.
+The latest version of R that is currently compatible with the database connectivity tools on O2 is R 4.1.1.
 
-```
-module spider R
-```
-
-The latest version of R that is currently compatible with the database connectivity tools is R 4.1.1.
-
-Once you have chosen a version of R you can load the module, e.g.:
+You can load the appropriate module with:
 
 ```
 module load gcc/6.2.0 R/4.1.1
 ```
 
-The first time that you run R you will need to install several database connectivity tools by running the
-commands in the `Code//R/InstallDatabaseTools.R` script in this repository.  If you are prompted to "use a 
-personal library" respond "yes", and then yes again if prompted to "create a personal library".
+You will need to install several database connectivity tools (only once) by running the
+commands in the `Code/R/InstallDatabaseTools.R` script in this repository.  If, when running those R commands,
+you are prompted to "use a personal library" respond "yes", and then "yes" again if prompted to "create a personal library".
 
 Once the dependencies are installed, you should be able to run the small example R code in
 `Code/R/ConnectToDatabase.R`.
