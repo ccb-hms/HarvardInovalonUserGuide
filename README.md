@@ -104,15 +104,43 @@ Once the dependencies are installed, you should be able to run the small example
 `Code/R/ConnectToDatabase.R`.
 
 ### Python
-Add modules for pyodbc and your preferred version of Python
+With the `gcc/6.2.0 unixODBC msodbcsql17/17.7.2.1-1 freetds` modules loaded as described above, 
+and kerberos tickets acquired, you will need to add the following module to your environment
+to run Python.  The latest version of Python installed on O2 that
+is compatible with the database connectivity tools is python 3.7.4.
 
-With the `msodbcsql17/17.7.2.1-1` module loaded, and kerberos tickets acquired, you can connect
-to the database from Python with the following code:
+```
+module load python/3.7.4
+```
 
-INSERT EXAMPLE FROM ETL OR AETNA DOCS
+Then create and activate a virtual environment:
+
+```
+python3 -m venv ~/InovalonEnv
+source ~/InovalonEnv/bin/activate
+```
+
+Inside of the virtual environment, upgrade `pip` and install `pyodbc`:
+
+```
+pip install --upgrade pip
+python3 -m pip install pyodbc
+```
+
+You should now be able to run Python and connect to the database to pull down data:
+
+```
+import pyodbc
+cnxn = pyodbc.connect('DRIVER=ODBC Driver 17 for SQL Server;Server=DBMIHDSWSQLP01.med.harvard.edu;Trusted_Connection=Yes;Database=Inovalon;TDS_Version=8.0;Encryption=require;Port=1433;REALM=MED.HARVARD.EDU')
+cursor = cnxn.cursor()
+cursor.execute("SELECT TOP 1 * FROM Inovalon.dbo.provider")
+row = cursor.fetchone()
+if row:
+    print(row)
+```
 
 ## VS Code
-Visual Studio Code can also be run via the [O2portal](https://o2portal.rc.hms.harvard.edu/pun/sys/dashboard).  
+Visual Studio Code can be run via the [O2portal](https://o2portal.rc.hms.harvard.edu/pun/sys/dashboard).  
 Please refer to Research Computing's documentation to learn more about running jobs through the Portal.
 
 Once you have a VS Code session running, you can install the MS SQL Server extension, which provides a GUI 
