@@ -1,5 +1,6 @@
-# InovalonDemo
-This repository contains example code and instructions for working with the Inovalon database.
+# Inovalon User Guide
+This repository contains guidance, example code, and instructions for working with the Inovalon database
+at Harvard Medical School.
 
 ## O2 Cluster
 
@@ -127,17 +128,8 @@ pip install --upgrade pip
 python3 -m pip install pyodbc
 ```
 
-You should now be able to run Python and connect to the database to pull down data:
-
-```
-import pyodbc
-cnxn = pyodbc.connect('DRIVER=ODBC Driver 17 for SQL Server;Server=DBMIHDSWSQLP01.med.harvard.edu;Trusted_Connection=Yes;Database=Inovalon;TDS_Version=8.0;Encryption=require;Port=1433;REALM=MED.HARVARD.EDU')
-cursor = cnxn.cursor()
-cursor.execute("SELECT TOP 1 * FROM Inovalon.dbo.provider")
-row = cursor.fetchone()
-if row:
-    print(row)
-```
+You should now be able to run Python and connect to the database to pull down data. See example code
+in `Code/Python/connect_to_database.py` in this repository.
 
 ## VS Code
 Visual Studio Code can be run via the [O2portal](https://o2portal.rc.hms.harvard.edu/pun/sys/dashboard).  
