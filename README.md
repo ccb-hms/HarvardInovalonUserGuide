@@ -46,7 +46,7 @@ kinit
 
 You will be prompted `Password for [USERNAME]@MED.HARVARD.EDU:`.  Type your password and press enter.  
 You can verify that the ticket was acquired by running the `klist` command.  If authentication was 
-successful, you see output similar to:
+successful, you should see output similar to:
 
 ```
 Ticket cache: FILE:/tmp/krb5cc_96451_9FpM4g
@@ -83,7 +83,7 @@ required modules and have acquired kerberos tickets.
 
 ### R
 In order to run R on O2, you first need to load the appropraite software module. As above, the module 
-can be loaded manually on a per-session basis, or the command can be added to you `~/.bashrc` initialization script.
+can be loaded manually on a per-session basis, or the command can be added to your `~/.bashrc` initialization script.
 The latest version of R that is currently compatible with the database connectivity tools on O2 is R 4.1.1.
 
 You can load the appropriate module with:
@@ -127,7 +127,8 @@ You should now be able to run Python and connect to the database to pull down da
 in `Code/Python/connect_to_database.py` in this repository.
 
 ## VS Code
-Visual Studio Code can be run via the [O2portal](https://o2portal.rc.hms.harvard.edu/pun/sys/dashboard).  
+Visual Studio Code can be run via the [O2portal](https://o2portal.rc.hms.harvard.edu/pun/sys/dashboard). 
+ 
 Please refer to Research Computing's documentation to learn more about running jobs through the Portal.
 
 Once you have a VS Code session running, you can install the MS SQL Server extension, which provides a GUI 
@@ -144,7 +145,7 @@ Bring up the Command Pallate (CTRL + shift + P), and begin typing
 "sql: add connection".  It should autocomplete; select "MS SQL: Add Connection".  When prompted for a server name, 
 enter "DBMIHDSWSQLP01.med.harvard.edu" (no quotes).  For the database, enter "Inovalon" (no quotes).
 For Authenticaion Type, select "Integrated".  Optionally provide a display name for the connection.  You should 
-see a prompt in the bottom-right of the window about encryption on the connection.  Click "Enable Trust Server Certificate".
+see a prompt in the bottom-right of the window about encryption on the connection; click "Enable Trust Server Certificate".
 
 If you click on the SQL Server icon in the Activity Bar, you should now see the contents of the database.
 You can use VS Code to interactively query the database.  It provides syntax highlighting and code completion
