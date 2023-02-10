@@ -37,9 +37,11 @@ After starting your VPN connection, open the Remote Desktop connection created a
 
 Once SSMS starts, you will be presented with a “Connect to Server” dialog.  Make sure the following default values are set in the dialog box, then click “Connect”.
 
-Server type: Database Engine
-Server name: localhost
-Authentication: Windows Authentication
+`Server type: Database Engine`
+
+`Server name: localhost`
+
+`Authentication: Windows Authentication`
 
 Once the connection is established, click New Query on the toolbar to create a new query session.
 
