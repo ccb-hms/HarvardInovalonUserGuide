@@ -59,7 +59,7 @@ An introduction to relational database systems is beyond the scope of this docum
 There are many other good tutorials available on the web.
 
 ## The Inovalon Database
-The Inovalon data is stored in the database named "Inovalon". Please see the [Inovalon help center] for data dictionaries, database diagrams, FAQs and more.
+The Inovalon data is stored in the database named "Inovalon". Please see the [Inovalon help center](https://support.inovalon.com/hc/en-us/categories/360005803231-Insights) for data dictionaries, database diagrams, FAQs and more.
 
 ## Creating Your Own Database
 You can create your own database on the server, which may be useful as a temporary place to store intermediate tables.  To do so, in SSMS, right-click on the “Databases” entry of the treeview on the left side of the screen.  Click on “New Database…”.  Please use your username as the name for the database.  Do not change the default file locations.  One change that you MUST make is to select the “Options” page on the left side of the “New Database” dialog and change the “Recovery model” value from “Full” to “Simple”.  Failure to do this will cause your transaction logs to expand unnecessarily, consuming large amounts of disk space.  If this happens, we will delete your database and you will be forced to recreate your work.
