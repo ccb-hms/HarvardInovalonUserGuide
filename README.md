@@ -250,3 +250,17 @@ If you click on the SQL Server icon in the Activity Bar, you should now see the 
 You can use VS Code to interactively query the database.  It provides syntax highlighting and code completion
 to make the task of designing complicated queries easier.  See the documentation for the extension for 
 additional details and functionality.
+
+## Example Workflows
+
+### R
+* `Code\R\AgeGenderDiagnosisRegression.R`:
+This example demonstrates how to manipulate the claimcode,
+member, and member_enrollment tables to generate a dataset
+to investigate the relationship between gender, age, and
+ASD diagnoses.  The Inovalon tables are manipuleted on the
+SQL Server to generate the data set of interest, and the
+analytic-ready table is then pulled into R to fit a simple
+regression model.  Althought the SQL statements are embedded 
+in the R script, they were designed interactively using SSMS
+and pasted into the R workflow.
