@@ -9,7 +9,7 @@ The Inovalon data is stored in a large relational database, Microsoft SQL Server
 
 2. You can create an encrypted connection to the server from O2 compute nodes and pull data into a program such as R, Python, or another analytic tool so that you can perform statistical analyses of the data.
 
-*_Some users may have stand-alone systems that have been authorized to access the Inovalon database_
+* _Some users may have stand-alone systems that have been authorized to access the Inovalon database_
 _for the purpose of running SAS.  We are providing a simple SAS program in `Code\SAS\ConnectToDatabase.sas` to demonstrate connectivity_
 _to the database via ODBC, but stand-alone system configuration is generally outside the scope of this guide._
 
