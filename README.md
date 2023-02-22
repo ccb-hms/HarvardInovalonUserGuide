@@ -65,6 +65,17 @@ There are many other good tutorials available on the web.
 ## The Inovalon Database
 The Inovalon data is stored in the database named "Inovalon". Please see the [Inovalon help center](https://support.inovalon.com/hc/en-us/categories/360005803231-Insights) for data dictionaries, database diagrams, FAQs and more.
 
+Inovalon has informed us that the source data that was sent to us contains approximately 5% duplicate claims. To remediate this
+they have provided the framework of an algorithm to de-duplicate the claims table.  We are actively working on implementing this 
+de-duplication strategy and will provide updates as they are available.
+
+The database is very large and consequently some queries will take a very long time to run. To facilitate interactive 
+data exploration, method development, and debugging, we have created a one million member random sample of the original database 
+and placed all of the records for this < 1% of the population in a separate database named `InovalonSample1M`. The tables in 
+`InovalonSample1M` have identical names and schemas to those in the complete `Inovalon` database. Thus, any workflows that
+are developed against the down-sampled data set can be run against the full data set by simply changing the database context.
+We strongly encourage use of this down-sampled data set during the development phase of your work.
+
 ## Creating Your Own Database
 You can create your own database on the server, which may be useful as a temporary place to store intermediate tables.  To do so, in SSMS, right-click on the “Databases” entry of the treeview on the left side of the screen.  Click on “New Database…”.  Please use your username as the name for the database.  Do not change the default file locations.  One change that you MUST make is to select the “Options” page on the left side of the “New Database” dialog and change the “Recovery model” value from “Full” to “Simple”.  Failure to do this will cause your transaction logs to expand unnecessarily, consuming large amounts of disk space.  If this happens, we will delete your database and you will be forced to recreate your work.
 
