@@ -39,13 +39,17 @@ You cannot connect directly to the database server (e.g., via remote desktop) wi
 
 After starting your VPN connection, open the Remote Desktop connection created above.  You will be presented with a virtual session on the database server once you successfully log in.  To start SSMS, click the Windows Start button, click “Microsoft SQL Server Tools 19” and click on “Microsoft SQL Server Management Studio”.
 
-Once SSMS starts, you will be presented with a “Connect to Server” dialog.  Make sure the following default values are set in the dialog box, then click “Connect”.
+Once SSMS starts, you will be presented with a “Connect to Server” dialog.  Make sure the following default values are set in the dialog box:
 
 `Server type: Database Engine`
 
 `Server name: localhost`
 
 `Authentication: Windows Authentication`
+
+Click `Options >>`, then on the `Connection Properties` tab. Check the `Encrypt connection` and `Trust server certificate` options if they are not already enabled.
+
+Then click “Connect”.
 
 Once the connection is established, click New Query on the toolbar to create a new query session.
 
