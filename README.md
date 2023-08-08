@@ -22,6 +22,8 @@ You will need access to the Harvard Medical School VPN to continue.  You can req
 
 http://it.hms.harvard.edu/services/servers-network/virtual-private-network
 
+Please email CCB with any technical questions.  The CCB help desk can be reached at <ccbhelp@hms.harvard.edu>.
+
 ## Connecting to the Database Server with Remote Desktop
 If you are on a macOS machine, you can download Microsoft Remote Desktop from the App Store.  Just search for “Microsoft Remote Desktop” and install the app (it’s free).  If you are on a Windows computer, then you should have the Remote Desktop tool installed by default (it’s typically located in the “Windows Accessories” folder in your start menu).
 
@@ -83,7 +85,7 @@ We strongly encourage use of this down-sampled data set during the development p
 ## Creating Your Own Database
 You can create your own database on the server, which may be useful as a temporary place to store intermediate tables.  To do so, in SSMS, right-click on the “Databases” entry of the treeview on the left side of the screen.  Click on “New Database…”.  Please use your username as the name for the database.  Do not change the default file locations.  One change that you MUST make is to select the “Options” page on the left side of the “New Database” dialog and change the “Recovery model” value from “Full” to “Simple”.  Failure to do this will cause your transaction logs to expand unnecessarily, consuming large amounts of disk space.  If this happens, we will delete your database and you will be forced to recreate your work.
 
-### Allowing Other Users to Access Your Database.
+### Allowing Other Users to Access Your Database
 By default, in SQL Server, a database is only accessible by the user who created it.  There are times when it may be helpful to allow other to access your database, e.g., when working on a team, or creating a database that you believe would generally be useful to others. 
 
 The easiest way to do this is through the GUI.  Expand your database in the tree view on the left, expand `Security` and right click on `Users`.  Select `New User`.  Under `User Type` select `Windows user`.  Under `User name` click on the ellipsis `…`.  
