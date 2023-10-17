@@ -2,6 +2,8 @@
 This repository contains guidance, example code, and instructions for working with the Inovalon database
 at Harvard Medical School.
 
+ If you have not already been granted access to the Inovalon dataset, please email HMS Office of Research Administration at data_ORA@hms.harvard.edu about gaining access to the Inovalon Data Access Hub.
+
 ## Introduction
 The Inovalon data is stored in a large relational database, Microsoft SQL Server, on Windows Server. There are two primary methods for accessing the data: 
 
