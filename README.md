@@ -27,7 +27,7 @@ http://it.hms.harvard.edu/services/servers-network/virtual-private-network
 Please email CCB with any technical questions.  The CCB help desk can be reached at <ccbhelp@hms.harvard.edu>.
 
 ## Connecting to the Database Server with Remote Desktop
-If you are on a macOS machine, you can download Microsoft Remote Desktop from the App Store.  Just search for “Microsoft Remote Desktop” and install the app (it’s free).  If you are on a Windows computer, then you should have the Remote Desktop tool installed by default (it’s typically located in the “Windows Accessories” folder in your start menu).
+If you are on a macOS machine, you can download Microsoft Remote Desktop from the App Store.  Just search for “Microsoft Remote Desktop” and install the app (it’s free).  If you are on a Windows computer, then you should have the Remote Desktop tool installed by default (it’s typically located in the “Windows Accessories” folder in your start menu). On Linux, [Remmina](https://remmina.org/) should work. 
 
 Start the Remote Desktop application and create a new connection. You can provide whatever name you’d like for the connection.  The server address for the connection should be:
 
@@ -56,6 +56,18 @@ Click `Options >>`, then on the `Connection Properties` tab. Check the `Encrypt 
 Then click “Connect”.
 
 Once the connection is established, click New Query on the toolbar to create a new query session.
+
+### Remmina settings on Linux
+
+Click the plus sign button to enter a new connection profile, then set:
+
+* Protocol: RDP (should be pre-selected)
+* Server: `ccbwsqlp01.med.harvard.edu`
+* Username: same `abc123` user ID as above
+* Domain: `MED` (no slash)
+* Resolution: Custom: 1400x1050 (your choice)
+
+Then save the connection profile and hit enter to start the quick connect login prompt.
 
 ## Relational Database Learning Materials
 An introduction to relational database systems is beyond the scope of this document.  If you need more information on working with the SQL language, relational database, or relational algebra in general, these are good starting points:
