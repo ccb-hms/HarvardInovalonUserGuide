@@ -299,3 +299,9 @@ analytic-ready table is then pulled into R to fit a simple
 regression model.  Althought the SQL statements are embedded 
 in the R script, they were designed interactively using SSMS
 and pasted into the R workflow.
+
+# GitLab and code management
+
+There is an installation of GitLab available for Inovalon users at [https://gitlab-ccb.med.harvard.edu/](https://gitlab-ccb.med.harvard.edu/) . You can log in with your O2 credentials. Gitlab can be used for repository version control similar to github (which you are not allowed to use with private Inovalon data per the data usage agreement) without having to carefully separate private and non-private information. It is on the same hardware / behind the same firewall as the database itself, so you are free to commit code that may contain member information. 
+
+Note that because it is behind the same firewall, you will not be able to connect to it via ssh, and your typical git configuration steps will fail. You will not be able to commit to it from a repository on your laptop. This is an inconvenient but necessary consequence of running on the database server. The easiest way to connect to this Gitlab instance is from a remote desktop connection to the database server.
