@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Inovalon User Guide
 
 This repository contains guidance, example code, and instructions for
