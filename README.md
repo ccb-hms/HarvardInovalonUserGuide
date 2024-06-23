@@ -420,7 +420,7 @@ items: Tools -\> Terminal -\> New Terminal
 When the terminal starts, run the command "kinit" (without the quotes).
 Enter your password when you are prompted. This creates authentication
 tokens on the host where your Rstudio job is running that allow you to
-connect to the database server.Then back in the R console, run this
+connect to the database server. Then back in the R console, run this
 command:
 `Sys.setenv(ODBCSYSINI="/n/app/msodbcsql17/17.10.2.1-1/etc")`
 
