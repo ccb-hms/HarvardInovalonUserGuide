@@ -1,21 +1,21 @@
-You are a technical assistant and SQL wizard.  This document between <BEGIN> and <END> describes a large health insurance database.
+You are a technical assistant and SQL wizard.  The text between <BEGIN> and <END> describes a large health insurance claims database.
 
 <BEGIN>
 # Introduction
 
-This data dictionary provides information about the definitions of all the data elements in each file type.
+This data dictionary provides information about the definitions of all the data elements in each table.
 
 Inovalon Insights Real-World Data (RWD) datasets consists of:
 
-- Core dataset of files that are included with each delivery type (per contractual terms)
-- Supplemental files that may accompany the core dataset
+- Core dataset of tables that are included with each delivery type (per contractual terms)
+- Supplemental tables that may accompany the core dataset
 
-Each file contains data that can be used to create a database structure with a system of choice. A list of columns is included, describing the column name used in the file, its data type, a description of the column content, expected values for each column, key notation, and required field indicators.
+Each table contains data that can be used to create a database structure with a system of choice. A list of columns is included, describing the column name used in the table, its data type, a description of the column content, expected values for each column, key notation, and required field indicators.
 
 
 # CLAIM
 
-The CLAIM file contains claim service line information for medical services and may also include information relating to lab services (without an associated result), pharmaceuticals administered from the practitioner’s office, and medical encounter data.
+The CLAIM table contains claim service line information for medical services and may also include information relating to lab services (without an associated result), pharmaceuticals administered from the practitioner’s office, and medical encounter data.
 
 ### Columns:
 
@@ -56,7 +56,7 @@ This concludes the CLAIM section. The next section, starting with CLAIM CODE, wi
 
 # CLAIMCODE
 
-The CLAIMCODE file contains claim attributes related to encounter data. See Appendix A for lookup values.
+The CLAIMCODE table contains claim attributes related to encounter data. See Appendix A for lookup values.
 
 ### Columns:
 
@@ -78,7 +78,7 @@ This concludes the CLAIM CODE section. The next section, starting with LAB CLAIM
 
 ## LABCLAIM
 
-The LABCLAIM file contains claim attributes associated with laboratory procedures.
+The LABCLAIM table contains claim attributes associated with laboratory procedures.
 
 | COLUMN NAME         | DESCRIPTION                                                                | COMMENTS                                                                                                 | DATA TYPE | KEY(S) | NULL |
 |---------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------|--------|------|
@@ -98,7 +98,7 @@ The LABCLAIM file contains claim attributes associated with laboratory procedure
 
 ## MEMBER
 
-The MEMBER file contains attributes pertaining to members enrolled in an insurance company provided health plan.
+The MEMBER table contains attributes pertaining to members enrolled in an insurance company provided health plan.
 
 | COLUMN NAME         | DESCRIPTION                                                                | COMMENTS                                                                                                 | DATA TYPE | KEY(S) | NULL |
 |---------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------|--------|------|
@@ -114,7 +114,7 @@ The MEMBER file contains attributes pertaining to members enrolled in an insuran
 
 ## MEMBERENROLLMENT_ADJUSTED
 
-The MEMBERENROLLMENT_ADJUSTED file contains adjusted enrollment dates that align with claims data. Sources often send enrollment information for their members for time spans that are longer than the spans for which they supply claims information. The process of aligning the begin and end dates with claims data is Inovalon defined as “enrollment adjusted.”
+The MEMBERENROLLMENT_ADJUSTED table contains adjusted enrollment dates that align with claims data. Sources often send enrollment information for their members for time spans that are longer than the spans for which they supply claims information. The process of aligning the begin and end dates with claims data is Inovalon defined as “enrollment adjusted.”
 
 | COLUMN NAME              | DESCRIPTION                                                                | COMMENTS                                                                                                 | DATA TYPE | KEY(S) | NULL |
 |--------------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------|--------|------|
@@ -145,7 +145,7 @@ The MEMBERENROLLMENT_ADJUSTED file contains adjusted enrollment dates that align
 
 ## PROVIDER
 
-The PROVIDER file contains attributes pertaining to health care providers, as identified by each health plan, who submit claims for services rendered to health plan members.
+The PROVIDER table contains attributes pertaining to health care providers, as identified by each health plan, who submit claims for services rendered to health plan members.
 
 | COLUMN NAME              | DESCRIPTION                                                                | COMMENTS                                                                                                 | DATA TYPE | KEY(S) | NULL |
 |--------------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------|--------|------|
@@ -188,7 +188,7 @@ The PROVIDER file contains attributes pertaining to health care providers, as id
 
 ## PROVIDERSUPPLEMENTAL
 
-The PROVIDER_SUPPLEMENTAL file contains the provider details passed through from our data sources, excluding validation from our third-party vendor.
+The PROVIDER_SUPPLEMENTAL table contains the provider details passed through from our data sources, excluding validation from our third-party vendor.
 
 | COLUMN NAME           | DESCRIPTION                                               | COMMENTS                                                                                                 | DATA TYPE | KEY(S) | NULL |
 |-----------------------|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------|--------|------|
@@ -211,7 +211,7 @@ The PROVIDER_SUPPLEMENTAL file contains the provider details passed through from
 
 ## RXCLAIM
 
-The RX CLAIM file contains attributes associated with pharmacy (prescription) claims.
+The RX CLAIM table contains attributes associated with pharmacy (prescription) claims.
 
 | COLUMN NAME           | DESCRIPTION                                               | COMMENTS                                                                                                 | DATA TYPE | KEY(S) | NULL |
 |-----------------------|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------------|-----------|--------|------|
@@ -385,18 +385,24 @@ Centers for Medicare & Medicaid Services (CMS) place of service (POS) codes are 
 
 <END>
 
-Write a Transact-SQL (for MS SQL Server) query for the database described above that does the following:
+Ask the user what they would like to do with the database, then write a Transact-SQL (for MS SQL Server) query that implements their desired workflow.
 
-calculates the average allowed amount for hip replacement surgeries in members who have had at least 2 diagnoses of diabetic retinopathy.  
+To accomplish this, follow these instructions:
 
-Use the description of the database tables, as well as your knowledge of ICD and CPT codes.  The ICD codes in this data do not include punctuation, so if you use ICD codes in your query, don't include period '.' symbols.  The ICD codes in this database are all billable codes, so if you use non-billable non-specific ICD codes, then any equality comparisons that include such codes in the query should use LIKE operator with `%` wildcard matches at the end of the ICD code.  Otherwise, specific billable codes can be used with the '=' equality operator, but remove the dot from the strings for these ICD codes.
+* Use the description of the database tables, as well as your knowledge of ICD and CPT codes.  The ICD codes in this data do not include punctuation, so if you use ICD codes in your query, don't include period '.' symbols.  The ICD codes in this database are all billable codes, so if you use non-billable non-specific ICD codes, then any equality comparisons that include non-specific codes should use LIKE operator with ```%``` wildcard matches at the end of the ICD code instead of the ```=``` operator or an ```IN``` statement.  Otherwise, specific billable codes can be used with the '=' equality operator, but remove the dot from the strings for these ICD codes.
 
-Make sure that NULL values are removed from any aggregate operation.
+* The database is named BMIF300QC and the tables are in the dbo schema in that database.  Please use fully-qualified (DATABASE.SCHEMA syntax) table names when refering to tables in the database.  Make sure to alias all table names to make the query easy to read.
 
-Make sure to alias all table names to make the query easy to read.
+* Implement this workflow in a way that never joins more than two tables at a time.  The intermediate artifacts should be stored as temporary tables in TempDB (table names prefixed with '#' character).  Create clustered columnstore indexes on each of these intermediate tables to make subsequent join operations fast.
 
-Implement this workflow in a way that never joins more than two tables at a time.  The intermediate artifacts should be stored as temporary tables in TempDB (table names prefixed with '#' character).  Create clustered columnstore indexes on each of these intermediate tables to make subsequent join operations fast.
+* Use the SELECT ... INTO syntax whenever possible instead of CREATE TABLE ... INSERT INTO ... SELECT, because the former is more compact and easier to read.  Issue a corresponding DROP TABLE IF EXISTS before creating any new tables via either CREATE TABLE ... or SELECT ... INTO
 
-Include a comment with each step in the workflow describing what the code does.
+* Make sure that NULL values are removed from any aggregate operations.
 
-If you don't know how to do this task, then say so.  Don't make things up.
+* Prefer to use joins over subqueries.
+
+* Include a comment with each step in the workflow describing what the code does.
+
+* Use appropriate indentation and whitespace to make the code readable.
+
+If you don't know how to do what the user has requested, then say so.  Don't make things up.
