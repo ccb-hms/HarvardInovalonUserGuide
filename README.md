@@ -268,7 +268,7 @@ server from either R or Python, you need to make the underlying database
 drivers accessible in your session. Load the required modules with:
 
 ```         
-module load gcc/6.2.0 unixODBC msodbcsql17/17.7.2.1-1 freetds
+module load gcc/14.2.0 unixODBC/2.3.12 freetds/1.4.26 msodbcsql17/17.10.6.1-1
 ```
 
 That command can be executed in the shell on a per-session basis, or you
@@ -287,7 +287,7 @@ and the others listed above among the currently loaded modules, e.g.:
 USERNAME@compute-e-16-233 (~): module list
 
 Currently Loaded Modules:
-  1) gcc/6.2.0   2) msodbcsql17/17.7.2.1-1   3) unixODBC/2.3.6   4) freetds/1.2.21
+  1) gcc/14.2.0   2) unixODBC/2.3.12   3) freetds/1.4.26   4) msodbcsql17/17.10.6.1-1
 ```
 
 ### Authentication
@@ -360,7 +360,7 @@ database connectivity tools on O2 is R 4.1.1.
 You can load the appropriate module with:
 
 ```         
-module load gcc/6.2.0 R/4.1.1
+module load gcc/14.2.0 R/4.4.2
 ```
 
 You will need to install several database connectivity tools (only once)
@@ -374,14 +374,14 @@ example R code in `Code/R/ConnectToDatabase.R`.
 
 ### Python
 
-With the `gcc/6.2.0 unixODBC msodbcsql17/17.7.2.1-1 freetds` modules
+With the `gcc/14.2.0 unixODBC/2.3.12 freetds/1.4.26 msodbcsql17/17.10.6.1-1` modules
 loaded as described above, and kerberos tickets acquired, you will need
 to add the following module to your environment to run Python. The
 latest version of Python installed on O2 that is compatible with the
 database connectivity tools is python 3.7.4.
 
 ```         
-module load python/3.7.4
+module load python/3.13.1
 ```
 
 Then create and activate a virtual environment:
@@ -412,7 +412,7 @@ running jobs through the Portal.
 
 When you specify the RStudio job in the O2 portal, you need to add these
 to the "Modules to be loaded" field:
-`gcc/9.2.0 R/4.2.1 unixODBC/2.3.6 freetds/1.2.21 msodbcsql17/17.10.2.1-1`
+`gcc/14.2.0 unixODBC/2.3.12 freetds/1.4.26 msodbcsql17/17.10.6.1-1 R/4.4.2`
 
 Once your RStudio session is available, click on the following menu
 items: Tools -\> Terminal -\> New Terminal
@@ -422,7 +422,7 @@ Enter your password when you are prompted. This creates authentication
 tokens on the host where your Rstudio job is running that allow you to
 connect to the database server. Then back in the R console, run this
 command:
-`Sys.setenv(ODBCSYSINI="/n/app/msodbcsql17/17.10.2.1-1/etc")`
+`Sys.setenv(ODBCSYSINI="/n/app/msodbcsql17/17.10.6.1-1/etc")`
 
 ## VS Code
 
