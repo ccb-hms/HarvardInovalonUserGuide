@@ -459,11 +459,15 @@ to make the task of designing complicated queries easier. See the
 documentation for the extension for additional details and
 functionality.
 
+## SAS and Stata
+The directories `Code/SAS` and `Code/Stata` contain examples of connecting
+to the database from these statistical applications.
+
 ## Example Workflows
 
 ### R
 
--   `Code\R\AgeGenderDiagnosisRegression.R`: This example demonstrates
+-   `Code/R/AgeGenderDiagnosisRegression.R`: This example demonstrates
     how to manipulate the claimcode, member, and member_enrollment
     tables to generate a dataset to investigate the relationship between
     gender, age, and ASD diagnoses. The Inovalon tables are manipuleted
